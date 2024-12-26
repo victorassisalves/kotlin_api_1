@@ -41,7 +41,7 @@ class TopicService (
             println(topicDTO)
             topics = topics.plus(topicFormMapper.map(topicDTO))
             val topic = topics.last()
-            topic.id = topics.size.toLong()
+            topic.id = topics.size.toLong()-1
             return topicViewMapper.map(topic)
 
         } catch (e: Exception) {

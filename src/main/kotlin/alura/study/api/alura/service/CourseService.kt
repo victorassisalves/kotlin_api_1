@@ -1,10 +1,19 @@
 package alura.study.api.alura.service
 
+import alura.study.api.alura.dto.CourseFormDTO
+import alura.study.api.alura.dto.CourseViewDTO
+import alura.study.api.alura.mapper.CourseFormMapper
+import alura.study.api.alura.mapper.CourseViewMapper
 import alura.study.api.alura.model.Course
 import org.springframework.stereotype.Service
+import java.util.stream.Collectors
 
 @Service
-class CourseService (var courses: List<Course> = emptyList()) {
+class CourseService (
+    var courses: List<Course> = emptyList(),
+    val courseViewMapper: CourseViewMapper,
+    val courseFormMapper: CourseFormMapper
+) {
     init {
         val course1 = Course(
             id = 0,
@@ -26,21 +35,22 @@ class CourseService (var courses: List<Course> = emptyList()) {
         courses = listOf(course1, course2, course3)
     }
 
-    fun fetchCourses(): List<Course> {
-        return courses
+    fun fetchCourses(): List<CourseViewDTO> {
+        return courses.stream().map {
+                t -> courseViewMapper.map(t)
+        }.collect(Collectors.toList());
     }
 
-    fun fetchCourseById(id: Long): Course {
-    return courses.find { it.id == id } ?: throw Exception("Course with ID #$id not found")
+    fun fetchCourseById(id: Long): CourseViewDTO {
+        val course = courses.find { it.id == id } ?: throw Exception("Course with ID #$id not found")
+        return courseViewMapper.map(course)
 }
 
-    fun createCourse(course: Course): Course {
-        courses = courses.plus(Course(
-            id = courses.size.toLong(),
-            name = course.name,
-            category = course.category
-        ))
-        return courses.last()
+    fun createCourse(course: CourseFormDTO): CourseViewDTO {
+        courses = courses.plus(courseFormMapper.map(course))
+        val newCourse = courses.last()
+        newCourse.id = courses.size.toLong()-1
+        return courseViewMapper.map(newCourse)
     }
 
 //    fun updateCourse(course: Course) {

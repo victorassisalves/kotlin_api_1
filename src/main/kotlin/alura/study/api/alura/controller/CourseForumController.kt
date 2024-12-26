@@ -1,5 +1,7 @@
 package alura.study.api.alura.controller
 
+import alura.study.api.alura.dto.CourseFormDTO
+import alura.study.api.alura.dto.CourseViewDTO
 import alura.study.api.alura.model.Author
 import alura.study.api.alura.model.Course
 import alura.study.api.alura.service.AuthorService
@@ -17,17 +19,17 @@ import org.springframework.web.bind.annotation.RestController
 class CourseForumController (private val service: CourseService) {
 
     @GetMapping
-    fun fetchAuthors(): List<Course> {
+    fun fetchAuthors(): List<CourseViewDTO> {
         return service.fetchCourses();
     }
 
     @GetMapping("/{id}")
-    fun fetchAuthorById(@PathVariable id: Long): Course {
+    fun fetchAuthorById(@PathVariable id: Long): CourseViewDTO {
         return service.fetchCourseById(id);
 
     }
     @PostMapping
-    fun createAuthor(@RequestBody  course: Course): Course {
+    fun createAuthor(@RequestBody  course: CourseFormDTO): CourseViewDTO {
         return service.createCourse(course);
     }
 
