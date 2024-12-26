@@ -4,7 +4,7 @@ import alura.study.api.alura.model.Author
 import org.springframework.stereotype.Service
 
 @Service
-class AuthorService (var authors: List<Author>) {
+class AuthorService (private var authors: List<Author> = emptyList() ) {
     init {
         val author1 = Author(
             id = 0,
@@ -20,7 +20,7 @@ class AuthorService (var authors: List<Author>) {
 
         val author3 = Author(
             id = 2,
-            name = "Kent Beck",
+            name = "Fowler K. Beck",
             email = "kent@email.com"
         )
         authors = listOf(author1, author2, author3)
