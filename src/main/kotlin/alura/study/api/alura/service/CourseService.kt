@@ -4,7 +4,7 @@ import alura.study.api.alura.model.Course
 import org.springframework.stereotype.Service
 
 @Service
-class CourseService (var courses: List<Course>) {
+class CourseService (var courses: List<Course> = emptyList()) {
     init {
         val course1 = Course(
             id = 0,
@@ -34,10 +34,15 @@ class CourseService (var courses: List<Course>) {
     return courses.find { it.id == id } ?: throw Exception("Course with ID #$id not found")
 }
 
-//    fun createCourse(course: Course) {
-//        courses = courses.plus(course)
-//    }
-//
+    fun createCourse(course: Course): Course {
+        courses = courses.plus(Course(
+            id = courses.size.toLong(),
+            name = course.name,
+            category = course.category
+        ))
+        return courses.last()
+    }
+
 //    fun updateCourse(course: Course) {
 //        courses = courses.map { if (it.id == course.id) course else it }
 //    }

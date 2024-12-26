@@ -1,6 +1,7 @@
 package alura.study.api.alura.controller
 
-import alura.study.api.alura.dto.TopicDTO
+import alura.study.api.alura.dto.TopicFormDTO
+import alura.study.api.alura.dto.TopicViewDTO
 import alura.study.api.alura.model.Topic
 import alura.study.api.alura.service.TopicService
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -17,17 +18,17 @@ import org.springframework.web.bind.annotation.RestController
 class TopicForumController (private val service: TopicService) {
 
     @GetMapping
-    fun fetchTopics(): List<Topic> {
+    fun fetchTopics(): List<TopicViewDTO> {
         return service.fetchTopics();
     }
 
     @GetMapping("/{id}")
-    fun fetchTopicById(@PathVariable id: Long): Topic {
+    fun fetchTopicById(@PathVariable id: Long): TopicViewDTO {
         return service.fetchTopicById(id);
 
     }
     @PostMapping
-    fun createTopic(@RequestBody  topicDTO: TopicDTO): Topic {
+    fun createTopic(@RequestBody  topicDTO: TopicFormDTO): TopicViewDTO {
         return service.createTopic(topicDTO);
     }
 
