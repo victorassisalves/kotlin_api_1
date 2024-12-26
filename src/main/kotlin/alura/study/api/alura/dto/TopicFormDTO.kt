@@ -1,6 +1,6 @@
 package alura.study.api.alura.dto
 
-data class TopicDTO (
+data class TopicFormDTO (
     val title: String,
     val message: String,
     val course: Long,
