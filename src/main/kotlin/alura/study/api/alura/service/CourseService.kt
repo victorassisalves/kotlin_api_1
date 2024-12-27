@@ -2,7 +2,7 @@ package alura.study.api.alura.service
 
 import alura.study.api.alura.dto.CourseFormDTO
 import alura.study.api.alura.dto.CourseViewDTO
-import alura.study.api.alura.mapper.CourseFormMapper
+import alura.study.api.alura.mapper.CourseMapper
 import alura.study.api.alura.mapper.CourseViewMapper
 import alura.study.api.alura.model.Course
 import org.springframework.stereotype.Service
@@ -12,7 +12,7 @@ import java.util.stream.Collectors
 class CourseService (
     var courses: List<Course> = emptyList(),
     val courseViewMapper: CourseViewMapper,
-    val courseFormMapper: CourseFormMapper
+    val courseFormMapper: CourseMapper
 ) {
     init {
         val course1 = Course(

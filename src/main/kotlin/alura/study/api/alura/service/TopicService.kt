@@ -2,19 +2,17 @@ package alura.study.api.alura.service
 
 import alura.study.api.alura.dto.TopicFormDTO
 import alura.study.api.alura.dto.TopicViewDTO
-import alura.study.api.alura.mapper.TopicFormMapper
+import alura.study.api.alura.mapper.TopicMapper
 import alura.study.api.alura.mapper.TopicViewMapper
-import alura.study.api.alura.model.Author
 import alura.study.api.alura.model.Topic
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
 import java.util.stream.Collectors
 
 @Service
 class TopicService (
     private var topics: List<Topic> = emptyList(),
     private val topicViewMapper: TopicViewMapper,
-    private val topicFormMapper: TopicFormMapper,
+    private val topicFormMapper: TopicMapper,
 ) {
 
     fun fetchTopics(): List<TopicViewDTO> {
