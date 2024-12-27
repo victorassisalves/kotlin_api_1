@@ -1,6 +1,5 @@
 package alura.study.api.alura.mapper
 
-interface Mapper <T, U> {
+interface MapperConfig <T, U> {
     fun map(t: T): U
-
 }

@@ -1,7 +1,10 @@
 package alura.study.api.alura.controller
 
+import alura.study.api.alura.dto.TopicAnswerFormDTO
+import alura.study.api.alura.dto.TopicAnswerViewDTO
 import alura.study.api.alura.dto.TopicFormDTO
 import alura.study.api.alura.dto.TopicViewDTO
+import alura.study.api.alura.service.TopicAnswerService
 import alura.study.api.alura.service.TopicService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -14,22 +17,22 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/topic")
-class TopicForumController (private val service: TopicService) {
+@RequestMapping("/topic/answer")
+class TopicAnswerController (private val service: TopicAnswerService) {
 
     @GetMapping
-    fun fetchTopics(): List<TopicViewDTO> {
-        return service.fetchTopics();
+    fun fetchTopics(): List<TopicAnswerViewDTO> {
+        return service.fetchAnswers();
     }
 
     @GetMapping("/{id}")
-    fun fetchTopicById(@PathVariable id: Long): TopicViewDTO {
-        return service.fetchTopicById(id);
+    fun fetchTopicById(@PathVariable id: Long): TopicAnswerViewDTO {
+        return service.fetchAnswerById(id);
 
     }
     @PostMapping
-    fun createTopic(@RequestBody @Valid topicDTO: TopicFormDTO): TopicViewDTO {
-        return service.createTopic(topicDTO);
+    fun createTopic(@RequestBody @Valid topicAnswerDTO: TopicAnswerFormDTO): TopicAnswerViewDTO {
+        return service.createAnswer(topicAnswerDTO);
     }
 
     @PutMapping

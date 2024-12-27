@@ -68,6 +68,10 @@
 			<artifactId>kotlin-test-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.bytebuddy</groupId>
+			<artifactId>byte-buddy</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
