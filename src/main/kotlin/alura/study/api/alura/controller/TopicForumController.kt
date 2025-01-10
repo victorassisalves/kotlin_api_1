@@ -37,7 +37,6 @@ class TopicForumController (private val service: TopicService) {
         val topic = service.createTopic(topicDTO);
         val uri = uriBuilder.path("/topic/${topic.id}").build().toUri()
         return ResponseEntity.created(uri).body(topic);
-    }
 
     @PutMapping
     fun updateTopic() {
