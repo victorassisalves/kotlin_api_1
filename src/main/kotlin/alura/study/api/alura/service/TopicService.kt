@@ -2,6 +2,7 @@ package alura.study.api.alura.service
 
 import alura.study.api.alura.dto.TopicFormDTO
 import alura.study.api.alura.dto.TopicViewDTO
+import alura.study.api.alura.exception.NotFoundException
 import alura.study.api.alura.mapper.TopicMapper
 import alura.study.api.alura.mapper.TopicViewMapper
 import alura.study.api.alura.model.Topic
@@ -13,6 +14,7 @@ class TopicService (
     private var topics: List<Topic> = emptyList(),
     private val topicViewMapper: TopicViewMapper,
     private val topicFormMapper: TopicMapper,
+    private val notFoundMessage: String = "Topic not found"
 ) {
 
     fun fetchTopics(): List<TopicViewDTO> {
@@ -26,12 +28,8 @@ class TopicService (
     }
 
     fun fetchTopicById(id: Long): TopicViewDTO {
-        try {
-            val topic = topics.find { it.id == id } ?: throw Exception("Topic with ID #$id not found")
-            return topicViewMapper.map(topic)
-        } catch (e: Exception) {
-            throw Exception("Error. $e")
-        }
+        val topic = topics.find { it.id == id } ?: throw NotFoundException(notFoundMessage)
+        return topicViewMapper.map(topic)
     }
 
     fun createTopic(topicDTO: TopicFormDTO): TopicViewDTO {
